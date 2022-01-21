@@ -1,9 +1,11 @@
+import {CreateCircle} from './figures.js';
+
 (function () {
 	$('head').append('<script type="text/javascript" src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/svg.min.js">' +
 		'</script>')
 
 
-	import CreateCircle from './figures.js';
+	
 
 	TW.Runtime.Widgets.circlegraph = function () {
 

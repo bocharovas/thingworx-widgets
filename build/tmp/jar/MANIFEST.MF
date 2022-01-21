@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Build-Date: Fri Jan 21 15:51:17 MSK 2022
+Built-By: Eclipse Plugin for ThingWorx Extension Development 9.0.1.202
+ 102191527
+Created-By: 1.8.0_311 (Oracle Corporation 25.311-b11)
+
+Name: ProjectsWidgets
+Package-Version: 1.0.0
+Package-Title: ProjectsWidgets
+Package-Vendor: 
+

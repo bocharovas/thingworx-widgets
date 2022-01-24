@@ -112,6 +112,29 @@ TW.IDE.Widgets.circlegraph = function () {
 			.viewbox(-width/16, -height/16, width/8, height/8);
 			
 		CreateCircle(canvas, width, height, Rad_Mill, cgColor[0], cgColor[1]);
+
+		let vibroData1 = new Array();
+			let alphaC = new Array();
+			let alphaS = new Array();
+			let points = 1100;
+			
+			for (let i=0; i < points; i++){
+				vibroData1[i] = (Math.random() * 4 + (Rad_Mill - 10)).toFixed(3);
+				alphaC[i] = vibroData1[i] * Math.cos((360/points * i) * (Math.PI/180));
+				alphaS[i] = vibroData1[i] * Math.sin((360/points * i) * (Math.PI/180));
+			}
+			
+			let trajectoryPoint = new SVG.PathArray();
+			trajectoryPoint[0] = ['M', alphaC[0], alphaS[0]];
+			for (let i=1; i < points; i++){
+				trajectoryPoint[i] = ['L', alphaC[i], alphaS[i]];
+			}
+			trajectoryPoint[points] = ['z'];
+
+			let trajectoryPath = canvas.path(trajectoryPoint).addClass('trajectoryPath_A')
+                                       .fill({ color: SVG.Color.random()})
+									   
+                                       .stroke({ color: SVG.Color.random() });
 	};
 
 };

@@ -78,7 +78,7 @@
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
 
-			console.log(Rad_Mill);
+			//console.log(Rad_Mill);
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)

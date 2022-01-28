@@ -4,7 +4,7 @@
 		'</script>')
 
 	TW.IDE.Widgets.circlegraph = function () {
-
+		
 		let canvas;
 		let width, height, Rad_Mill;
 		let cgColor = (new Array(10)).map(function () { return SVG.Color.random(); });
@@ -23,6 +23,8 @@
 				.stroke({ color: cCircle });
 		}
 
+		
+
 		this.widgetIconUrl = function () {
 			return "../Common/extensions/ProjectsWidgets/ui/circlegraph/default_widget_icon.ide.png";
 		};
@@ -37,21 +39,6 @@
 						'baseType': 'STRING',
 						'defaultValue': 'CircleGraph Property default value',
 						'isBindingTarget': true
-					},
-					'quality': {
-                        'description': 'Field quality',
-                        'baseType': 'FIELDNAME',
-                        'sourcePropertyName': 'CircleArray'
-                    },
-                    'time': {
-                        'description': 'Field time',
-                        'baseType': 'FIELDNAME',
-                        'sourcePropertyName': 'CircleArray'
-                    },
-                    'value': {
-                        'description': 'Field value',
-                        'baseType': 'FIELDNAME',
-                        'sourcePropertyName': 'CircleArray'
 					},
 					'CircleArray': {
 						'description': 'Data source',
@@ -130,9 +117,9 @@
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
-
+			
 			CreateCircle(canvas, width, height, Rad_Mill, cgColor[0], cgColor[1]);
-
+			
 			let alphaC = new Array();
 			let alphaS = new Array();
 			let points = 1100;

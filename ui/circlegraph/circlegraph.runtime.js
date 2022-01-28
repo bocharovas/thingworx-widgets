@@ -12,14 +12,16 @@
 				.fill('none')
 				.addClass('mbCircle')	
 
-			canvasName.line()
+				var line = canvasName.line(0, 0, 100, 150).stroke({ width: 1 })
+
+			/*canvasName.line()
 				.x1(0)
 				.y1(0)
 				.x2(10)
 				.y2(10)	
 				.stroke({ color: '#ffd800' })
 				.stroke({ width: '#ffd800' })
-				.addClass('mbCircle')		
+				.addClass('mbCircle')*/		
 		}
 		
 		let canvas;

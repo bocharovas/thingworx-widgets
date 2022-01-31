@@ -11,17 +11,6 @@
 				.center(0, 0)
 				.fill('none')
 				.addClass('mbCircle')	
-
-				var line = canvasName.line(0, 0, 100, 150).stroke({ width: 1 })
-
-			/*canvasName.line()
-				.x1(0)
-				.y1(0)
-				.x2(10)
-				.y2(10)	
-				.stroke({ color: '#ffd800' })
-				.stroke({ width: '#ffd800' })
-				.addClass('mbCircle')*/		
 		}
 		
 		let canvas;
@@ -50,6 +39,18 @@
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
 
 			CreateCircle(canvas, Rad_Mill);
+
+			let trajectoryLine = new SVG.PathArray();
+			for (let j = 0; j < 12; (j = j + 2)) {
+				trajectoryLine[j] = ['M', Rad_Mill * Math.cos((j/2 * 30)  * Math.PI/180), 
+					Rad_Mill * Math.sin((j/2 * 30) * Math.PI/180)];				
+				trajectoryLine[j+1] = ['L', Rad_Mill * Math.cos(((j/2 * 30) + 180) * Math.PI/180),
+					Rad_Mill * Math.sin(((j/2 * 30) + 180) * Math.PI/180)];
+			}	
+			canvas.path(trajectoryLine).addClass('mbCircle');
+			canvas.text('30').addClass('mbText');
+			
+			
 		};
 		
 		this.updateProperty = function (updatePropertyInfo) {
@@ -79,7 +80,7 @@
 				trajectoryPoint[points] = ['z'];
 
 				SVG.find('.trajectoryPath_A').remove();
-				//canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
+				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
 				
 				}
 		};

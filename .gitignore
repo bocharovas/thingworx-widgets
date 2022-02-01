@@ -1,6 +1,7 @@
 
  powershell.msi
  .gradle/
+ build/
 
 
 # Compiled class file

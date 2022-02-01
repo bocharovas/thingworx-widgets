@@ -2,17 +2,11 @@
 	$('head').append('<script type="text/javascript"' +
 		'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/svg.min.js">' +
 		'</script>')
+			 .append('<script type="text/javascript"' +
+		'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/figures.js">' +
+		'</script>')
 
 	TW.Runtime.Widgets.circlegraph = function () {
-
-		function CreateCircle(canvasName, Radius_Mill) {
-			canvasName.circle()
-				.radius(Radius_Mill)
-				.center(0, 0)
-				.fill('none')
-				.addClass('mbCircle')
-		}
-
 		let canvas;
 		let width, height, Rad_Mill;
 		let vibroData1 = new Array();
@@ -37,9 +31,9 @@
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
-
+			console.log('sta')
 			CreateCircle(canvas, Rad_Mill);
-
+			console.log('fin')
 			let trajectoryLine = new SVG.PathArray();
 			for (let j = 0; j < 12; (j = j + 2)) {
 				let x = Rad_Mill * Math.cos((j / 2 * 30) * Math.PI / 180);

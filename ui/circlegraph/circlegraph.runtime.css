@@ -1,16 +1,18 @@
 .trajectoryPath_A {
     stroke:#ffd800;
-    stroke-width: 0.1;
+    stroke-width: 0.01rem;
     fill: none;
 }
 
 .mbCircle {
-    stroke:white;
-    stroke-width: 0.05px;
+    stroke:#ffffff;
+    stroke-width: 0.01rem;
 }
 
 .mbText {
-    stroke:white;
-    stroke-width: 0.1px;
+    stroke:#ffffff;
+    stroke-width: 0.01rem;
+    fill: white;
+    font-size: 0.1rem;  
 }
 

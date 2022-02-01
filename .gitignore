@@ -2,6 +2,7 @@
  powershell.msi
  .gradle/
  build/
+ lost.txt
 
 
 # Compiled class file

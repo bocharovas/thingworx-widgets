@@ -16,3 +16,10 @@
     font-size: 0.1rem;  
 }
 
+.axis_x_0 {
+    stroke: rgb(0, 180, 246);
+    stroke-opacity: 0.5;
+    stroke-width: 0.08;
+    stroke-dasharray: 2, 0.8;
+}
+

@@ -10,6 +10,7 @@
 		let canvas;
 		let width, height, Rad_Mill;
 		let vibroData1 = new Array();
+		let validity = new Array();
 		let points = 1100;
 		var valueElem;
 
@@ -27,14 +28,14 @@
 
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
+			console.log(Rad_Mill);
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
-			console.log('sta')
 			CreateCircle(canvas, Rad_Mill);
-			console.log('fin')
 			let trajectoryLine = new SVG.PathArray();
+			
 			for (let j = 0; j < 12; (j = j + 2)) {
 				let x = Rad_Mill * Math.cos((j / 2 * 30) * Math.PI / 180);
 				let y = Rad_Mill * Math.sin((j / 2 * 30) * Math.PI / 180);
@@ -42,6 +43,8 @@
 				let yn = Rad_Mill * Math.sin(((j / 2 * 30) + 180) * Math.PI / 180);
 				trajectoryLine[j] = ['M', x, y];
 				trajectoryLine[j + 1] = ['L', xn, yn];
+
+				console.log(x - xn, y-yn);
 
 				switch (j) {
 					case 0:
@@ -98,7 +101,7 @@
 					.dy(yn)
 					.addClass('mbText')
 			}
-			canvas.path(trajectoryLine).addClass('mbCircle');
+			canvas.path(trajectoryLine).addClass('axis_x_0');
 		};
 
 		this.updateProperty = function (updatePropertyInfo) {
@@ -106,26 +109,50 @@
 				valueElem.text(updatePropertyInfo.SinglePropertyValue);
 				this.setProperty('CircleGraph Property', updatePropertyInfo.SinglePropertyValue);
 			}
+			
+			let scale = this.getProperty('ScaleCircleArray');
+
+			
+
+			console.log(scale);
+
 			if (updatePropertyInfo.TargetProperty === 'CircleArray') {
 				let rows = updatePropertyInfo.ActualDataRows;
-
+				
 				for (let i = 0; i < rows.length; i++) {
-					vibroData1[i] = Rad_Mill - rows[i].value;
+					vibroData1[i] = scale - rows[i].S603C01PeakRaw;
+					validity[i] = rows[i].S603C01Validity;
+					
 				}
+
+				console.log(validity);	
 
 				let alphaC = new Array();
 				let alphaS = new Array();
+				
 
 				for (let i = 0; i < points; i++) {
-					alphaC[i] = vibroData1[i] * Math.cos((360 / points * i) * (Math.PI / 180));
-					alphaS[i] = vibroData1[i] * Math.sin((360 / points * i) * (Math.PI / 180));
+					alphaC[i] = ((vibroData1[i]/scale) * Rad_Mill) * Math.cos((360 / points * i) * (Math.PI / 180))
+						;
+					alphaS[i] = ((vibroData1[i]/scale) * Rad_Mill) * Math.sin((360 / points * i) * (Math.PI / 180))
+						;
 				}
 
 				let trajectoryPoint = new SVG.PathArray();
 				trajectoryPoint[0] = ['M', alphaC[0], alphaS[0]];
 
+
+
 				for (let i = 1; i < points; i++) {
-					trajectoryPoint[i] = ['L', alphaC[i], alphaS[i]];
+					console.log(rows[i].S603C01Validity);
+					console.log('!!!!!!!');
+					console.log(validity[i]);
+					
+					if (validity[i].toString() === 'true') {
+						trajectoryPoint[i] = ['L', alphaC[i], alphaS[i]];
+						console.log('immerhin');
+					}
+					
 				}
 
 				trajectoryPoint[points] = ['z'];

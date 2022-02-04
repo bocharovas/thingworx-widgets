@@ -55,6 +55,14 @@
 						'isEditable': true,
 						'isBindingTarget': true
 					},
+					'ScaleCircleArray': {
+						'description': 'Total scale of the size',
+						'baseType': 'NUMBER',
+						'isVisible': true,
+						'defaultValue': 100,
+						'isEditable': true,
+						'isBindingTarget': true
+					},
 					'Width': {
 						'description': 'Total width of the widget',
 						'baseType': 'INTEGER',

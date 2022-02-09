@@ -9,7 +9,8 @@
 	TW.Runtime.Widgets.circlegraph = function () {
 		let canvas;
 		let width, height, Rad_Mill;
-		let vibroData1 = new Array();
+		let rmsAccRawRel = new Array();
+		let rmsAccRawAbs = new Array();
 		let validity = new Array();
 		let vibroData1Min;
 		let vibroData1Max;
@@ -27,9 +28,9 @@
 			valueElem = this.jqElement.find('.circlegraph-property');
 			valueElem.text(this.getProperty('CircleGraph Property'));
 			width = this.getProperty('Width');
-			console.log(11);
+			//console.log(11);
 			
-			console.log(22);
+			//console.log(22);
 
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
@@ -108,29 +109,29 @@
 			}
 			canvas.path(trajectoryLine).addClass('axis_x_0');
 		};
-		console.log('io');
+		//console.log('io');
 		
 		this.updateProperty = function (updatePropertyInfo) {
 
 			switch (updatePropertyInfo.TargetProperty){
 				case 'CircleArrayMin':
 					vibroData1Min = updatePropertyInfo.SinglePropertyValue;
-					console.log(vibroData1Min);
-					console.log('min');
+					//console.log(vibroData1Min);
+					//console.log('min');
 					break;
 				case 'CircleArrayMax':
 					vibroData1Max = updatePropertyInfo.SinglePropertyValue;
-					console.log(vibroData1Max);
-					console.log('max');
+					//console.log(vibroData1Max);
+					//console.log('max');
 					break;
 				case 'ScaleCircleArray':
 					scale = updatePropertyInfo.SinglePropertyValue;
-					console.log(scale);
-					console.log('scale');
+					//console.log(scale);
+					//console.log('scale');
 					break;
 			}
 
-			//scale = 3000;
+			
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
 				valueElem.text(updatePropertyInfo.SinglePropertyValue);
@@ -138,55 +139,65 @@
 			}
 		
 			if (updatePropertyInfo.TargetProperty === 'CircleArray') {
-				//console.log(98);
+				
 				let rows = updatePropertyInfo.ActualDataRows;
-				//console.log(142);
+				
 				
 				for (let i = 0; i < rows.length; i++) {
-					vibroData1[i] = scale - rows[i].S603C01RMSAccRaw;
+					rmsAccRawRel[i] = scale - rows[i].S603C01RMSAccRaw;
+					rmsAccRawAbs[i] = scale - rmsAccRawRel[i];
+					
 					validity[i] = rows[i].S603C01Validity;	
 				}
-				//console.log(555);
+				//console.log(rows.S603C01RMSAccRaw);
+				//console.log('KKKKKK');
+				//console.log(rmsAccRawRel);
 				let alphaC = new Array();
 				let alphaS = new Array();
 
 				let angle;
 				let correctur = 180;
-				//console.log('vibroData1Min');
-				//console.log(33);
+				
+				
 				for (let i = 0; i < rows.length; i++) {
 					angle = 360 / rows.length * i - correctur;
 					if(angle < 0) angle = angle + 360;
-					alphaC[i] = ((vibroData1[i]/scale) * Rad_Mill) * 
+					alphaC[i] = ((rmsAccRawRel[i]/scale) * Rad_Mill) * 
 						Math.cos((angle) * (Math.PI / 180));
-					alphaS[i] = ((vibroData1[i]/scale) * Rad_Mill) * 
+					alphaS[i] = ((rmsAccRawRel[i]/scale) * Rad_Mill) * 
 						Math.sin((angle) * (Math.PI / 180));
 				}
-				console.log(alphaC);
-				console.log(alphaS);
+				
+				
 				let trajectoryPoint = new SVG.PathArray();
 				trajectoryPoint[0] = ['M', alphaC[0], alphaS[0]];
 			
 				let j = 1;
-				vibroData1Min = 100;
-				vibroData1Max = 800;
+				
+				console.log(rmsAccRawAbs);
+				console.log('!');
+				console.log(rmsAccRawRel);
+				console.log('&');
+				console.log(vibroData1Min);
+				console.log(vibroData1Max);
+				console.log('&&');
 				
 				for (let i = 1; i < (rows.length - 2); i++) {
 				
-					if (validity[i].toString() === 'true' && rows[i].S603C01RMSAccRaw >= vibroData1Min
-						&& rows[i].S603C01RMSAccRaw <= vibroData1Max) {
+					if (validity[i].toString() === 'true' && rmsAccRawAbs[i] >= vibroData1Min
+					&& rmsAccRawAbs[i] <= vibroData1Max /*&& rmsAccRawRel[i] > 0*/) {
 						trajectoryPoint[j] = ['L', alphaC[i], alphaS[i]];
 						j++;
 					}
 				}
-				//console.log(55);
+				
 				trajectoryPoint[j] = ['z'];
-				//console.log(trajectoryPoint);
+				
 				SVG.find('.trajectoryPath_A').remove();
-				console.log(trajectoryPoint);
+				//console.log(trajectoryPoint);
 				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
 
-				console.log(669);
+				//console.log(669);
 			}
 		};
 	};

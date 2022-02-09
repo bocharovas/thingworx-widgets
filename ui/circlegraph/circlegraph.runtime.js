@@ -11,7 +11,9 @@
 		let width, height, Rad_Mill;
 		let vibroData1 = new Array();
 		let validity = new Array();
-		let points = 1100;
+		let vibroData1Min;
+		let vibroData1Max;
+		let scale;
 		var valueElem;
 
 		this.renderHtml = function () {
@@ -25,10 +27,13 @@
 			valueElem = this.jqElement.find('.circlegraph-property');
 			valueElem.text(this.getProperty('CircleGraph Property'));
 			width = this.getProperty('Width');
+			console.log(11);
+			
+			console.log(22);
 
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
-			console.log(Rad_Mill);
+		
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
@@ -44,7 +49,7 @@
 				trajectoryLine[j] = ['M', x, y];
 				trajectoryLine[j + 1] = ['L', xn, yn];
 
-				console.log(x - xn, y-yn);
+				
 
 				switch (j) {
 					case 0:
@@ -103,61 +108,85 @@
 			}
 			canvas.path(trajectoryLine).addClass('axis_x_0');
 		};
-
+		console.log('io');
+		
 		this.updateProperty = function (updatePropertyInfo) {
+
+			switch (updatePropertyInfo.TargetProperty){
+				case 'CircleArrayMin':
+					vibroData1Min = updatePropertyInfo.SinglePropertyValue;
+					console.log(vibroData1Min);
+					console.log('min');
+					break;
+				case 'CircleArrayMax':
+					vibroData1Max = updatePropertyInfo.SinglePropertyValue;
+					console.log(vibroData1Max);
+					console.log('max');
+					break;
+				case 'ScaleCircleArray':
+					scale = updatePropertyInfo.SinglePropertyValue;
+					console.log(scale);
+					console.log('scale');
+					break;
+			}
+
+			//scale = 3000;
+
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
 				valueElem.text(updatePropertyInfo.SinglePropertyValue);
 				this.setProperty('CircleGraph Property', updatePropertyInfo.SinglePropertyValue);
 			}
-			
-			let scale = this.getProperty('ScaleCircleArray');
-
-			
-
-			console.log(scale);
-
+		
 			if (updatePropertyInfo.TargetProperty === 'CircleArray') {
+				//console.log(98);
 				let rows = updatePropertyInfo.ActualDataRows;
+				//console.log(142);
 				
 				for (let i = 0; i < rows.length; i++) {
-					vibroData1[i] = scale - rows[i].S603C01PeakRaw;
-					validity[i] = rows[i].S603C01Validity;
-					
+					vibroData1[i] = scale - rows[i].S603C01RMSAccRaw;
+					validity[i] = rows[i].S603C01Validity;	
 				}
-
-				console.log(validity);	
-
+				//console.log(555);
 				let alphaC = new Array();
 				let alphaS = new Array();
-				
 
-				for (let i = 0; i < points; i++) {
-					alphaC[i] = ((vibroData1[i]/scale) * Rad_Mill) * Math.cos((360 / points * i) * (Math.PI / 180))
-						;
-					alphaS[i] = ((vibroData1[i]/scale) * Rad_Mill) * Math.sin((360 / points * i) * (Math.PI / 180))
-						;
+				let angle;
+				let correctur = 180;
+				//console.log('vibroData1Min');
+				//console.log(33);
+				for (let i = 0; i < rows.length; i++) {
+					angle = 360 / rows.length * i - correctur;
+					if(angle < 0) angle = angle + 360;
+					alphaC[i] = ((vibroData1[i]/scale) * Rad_Mill) * 
+						Math.cos((angle) * (Math.PI / 180));
+					alphaS[i] = ((vibroData1[i]/scale) * Rad_Mill) * 
+						Math.sin((angle) * (Math.PI / 180));
 				}
-
+				console.log(alphaC);
+				console.log(alphaS);
 				let trajectoryPoint = new SVG.PathArray();
 				trajectoryPoint[0] = ['M', alphaC[0], alphaS[0]];
-
-
-
-				for (let i = 1; i < points; i++) {
-					console.log(rows[i].S603C01Validity);
-					console.log('!!!!!!!');
-					console.log(validity[i]);
-					
-					if (validity[i].toString() === 'true') {
-						trajectoryPoint[i] = ['L', alphaC[i], alphaS[i]];
-						console.log('immerhin');
+			
+				let j = 1;
+				vibroData1Min = 100;
+				vibroData1Max = 800;
+				
+				for (let i = 1; i < (rows.length - 2); i++) {
+				
+					if (validity[i].toString() === 'true' && rows[i].S603C01RMSAccRaw >= vibroData1Min
+						&& rows[i].S603C01RMSAccRaw <= vibroData1Max) {
+						trajectoryPoint[j] = ['L', alphaC[i], alphaS[i]];
+						j++;
 					}
-					
 				}
-
-				trajectoryPoint[points] = ['z'];
+				//console.log(55);
+				trajectoryPoint[j] = ['z'];
+				//console.log(trajectoryPoint);
 				SVG.find('.trajectoryPath_A').remove();
+				console.log(trajectoryPoint);
 				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
+
+				console.log(669);
 			}
 		};
 	};

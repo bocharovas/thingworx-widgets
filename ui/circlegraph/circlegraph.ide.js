@@ -47,6 +47,20 @@
 						'baseType': 'INFOTABLE',
                         'warnIfNotBoundAsTarget': true
 					},
+					'CircleArrayMax': {
+						'description': 'Data source max',
+                        'isBindingTarget': true,
+                        'isEditable': false,
+						'baseType': 'INTEGER',
+                        'warnIfNotBoundAsTarget': true
+					},
+					'CircleArrayMin': {
+						'description': 'Data source min',
+                        'isBindingTarget': true,
+                        'isEditable': false,
+						'baseType': 'INTEGER',
+                        'warnIfNotBoundAsTarget': true
+					},
 					'SizeCircleArray': {
 						'description': 'Total width of the size',
 						'baseType': 'INTEGER',

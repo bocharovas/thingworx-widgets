@@ -15,6 +15,7 @@
 		let vibroData1Min;
 		let vibroData1Max;
 		let scale;
+		let correctur;
 		var valueElem;
 
 		this.renderHtml = function () {
@@ -109,25 +110,21 @@
 			}
 			canvas.path(trajectoryLine).addClass('axis_x_0');
 		};
-		//console.log('io');
 		
 		this.updateProperty = function (updatePropertyInfo) {
 
 			switch (updatePropertyInfo.TargetProperty){
 				case 'CircleArrayMin':
 					vibroData1Min = updatePropertyInfo.SinglePropertyValue;
-					//console.log(vibroData1Min);
-					//console.log('min');
 					break;
 				case 'CircleArrayMax':
 					vibroData1Max = updatePropertyInfo.SinglePropertyValue;
-					//console.log(vibroData1Max);
-					//console.log('max');
 					break;
 				case 'ScaleCircleArray':
 					scale = updatePropertyInfo.SinglePropertyValue;
-					//console.log(scale);
-					//console.log('scale');
+					break;
+				case 'AngleCircleArray':
+					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
 			}
 
@@ -156,7 +153,7 @@
 				let alphaS = new Array();
 
 				let angle;
-				let correctur = 180;
+				//let correctur = 180;
 				
 				
 				for (let i = 0; i < rows.length; i++) {

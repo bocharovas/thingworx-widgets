@@ -61,8 +61,8 @@
 						'baseType': 'INTEGER',
                         'warnIfNotBoundAsTarget': true
 					},
-					'SizeCircleArray': {
-						'description': 'Total width of the size',
+					'AngleCircleArray': {
+						'description': 'Total width of the angle',
 						'baseType': 'INTEGER',
 						'isVisible': true,
 						'defaultValue': 400,
@@ -75,7 +75,8 @@
 						'isVisible': true,
 						'defaultValue': 100,
 						'isEditable': true,
-						'isBindingTarget': true
+						'isBindingTarget': true,
+						'isBindingSource': true
 					},
 					'Width': {
 						'description': 'Total width of the widget',

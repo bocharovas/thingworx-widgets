@@ -2,9 +2,9 @@
 	$('head').append('<script type="text/javascript"' +
 		'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/svg.min.js">' +
 		'</script>')
-			 .append('<script type="text/javascript"' +
-		'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/figures.js">' +
-		'</script>')
+		.append('<script type="text/javascript"' +
+			'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/figures.js">' +
+			'</script>')
 
 	TW.Runtime.Widgets.circlegraph = function () {
 		let canvas;
@@ -29,20 +29,16 @@
 			valueElem = this.jqElement.find('.circlegraph-property');
 			valueElem.text(this.getProperty('CircleGraph Property'));
 			width = this.getProperty('Width');
-			//console.log(11);
-			
-			//console.log(22);
 
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
-		
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
 			CreateCircle(canvas, Rad_Mill);
 			let trajectoryLine = new SVG.PathArray();
-			
+
 			for (let j = 0; j < 12; (j = j + 2)) {
 				let x = Rad_Mill * Math.cos((j / 2 * 30) * Math.PI / 180);
 				let y = Rad_Mill * Math.sin((j / 2 * 30) * Math.PI / 180);
@@ -50,8 +46,6 @@
 				let yn = Rad_Mill * Math.sin(((j / 2 * 30) + 180) * Math.PI / 180);
 				trajectoryLine[j] = ['M', x, y];
 				trajectoryLine[j + 1] = ['L', xn, yn];
-
-				
 
 				switch (j) {
 					case 0:
@@ -110,10 +104,10 @@
 			}
 			canvas.path(trajectoryLine).addClass('axis_x_0');
 		};
-		
+
 		this.updateProperty = function (updatePropertyInfo) {
 
-			switch (updatePropertyInfo.TargetProperty){
+			switch (updatePropertyInfo.TargetProperty) {
 				case 'CircleArrayMin':
 					vibroData1Min = updatePropertyInfo.SinglePropertyValue;
 					break;
@@ -128,73 +122,54 @@
 					break;
 			}
 
-			
-
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
 				valueElem.text(updatePropertyInfo.SinglePropertyValue);
 				this.setProperty('CircleGraph Property', updatePropertyInfo.SinglePropertyValue);
 			}
-		
+
 			if (updatePropertyInfo.TargetProperty === 'CircleArray') {
-				
+
 				let rows = updatePropertyInfo.ActualDataRows;
-				
-				
+
 				for (let i = 0; i < rows.length; i++) {
 					rmsAccRawRel[i] = scale - rows[i].S603C01RMSAccRaw;
 					rmsAccRawAbs[i] = scale - rmsAccRawRel[i];
-					
-					validity[i] = rows[i].S603C01Validity;	
+					validity[i] = rows[i].S603C01Validity;
 				}
-				//console.log(rows.S603C01RMSAccRaw);
-				//console.log('KKKKKK');
-				//console.log(rmsAccRawRel);
+
 				let alphaC = new Array();
 				let alphaS = new Array();
-
 				let angle;
-				//let correctur = 180;
-				
-				
+
 				for (let i = 0; i < rows.length; i++) {
 					angle = 360 / rows.length * i - correctur;
-					if(angle < 0) angle = angle + 360;
-					alphaC[i] = ((rmsAccRawRel[i]/scale) * Rad_Mill) * 
+					if (angle < 0) angle = angle + 360;
+					alphaC[i] = ((rmsAccRawRel[i] / scale) * Rad_Mill) *
 						Math.cos((angle) * (Math.PI / 180));
-					alphaS[i] = ((rmsAccRawRel[i]/scale) * Rad_Mill) * 
+					alphaS[i] = ((rmsAccRawRel[i] / scale) * Rad_Mill) *
 						Math.sin((angle) * (Math.PI / 180));
 				}
-				
-				
+
 				let trajectoryPoint = new SVG.PathArray();
-				trajectoryPoint[0] = ['M', alphaC[0], alphaS[0]];
-			
-				let j = 1;
-				
-				console.log(rmsAccRawAbs);
-				console.log('!');
-				console.log(rmsAccRawRel);
-				console.log('&');
-				console.log(vibroData1Min);
-				console.log(vibroData1Max);
-				console.log('&&');
-				
-				for (let i = 1; i < (rows.length - 2); i++) {
-				
+				let j = 0;
+
+				for (let i = 0; i < (rows.length); i++) {
+
 					if (validity[i].toString() === 'true' && rmsAccRawAbs[i] >= vibroData1Min
-					&& rmsAccRawAbs[i] <= vibroData1Max /*&& rmsAccRawRel[i] > 0*/) {
-						trajectoryPoint[j] = ['L', alphaC[i], alphaS[i]];
+						&& rmsAccRawAbs[i] <= vibroData1Max /*&& rmsAccRawRel[i] > 0*/) {
+						if (j == 0) {
+							trajectoryPoint[j] = ['M', alphaC[i], alphaS[i]];
+						} else {
+							trajectoryPoint[j] = ['L', alphaC[i], alphaS[i]];
+						}
 						j++;
 					}
 				}
-				
-				trajectoryPoint[j] = ['z'];
-				
-				SVG.find('.trajectoryPath_A').remove();
-				//console.log(trajectoryPoint);
-				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
 
-				//console.log(669);
+				trajectoryPoint[j] = ['z'];
+				//console.log(trajectoryPoint);
+				SVG.find('.trajectoryPath_A').remove();
+				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
 			}
 		};
 	};

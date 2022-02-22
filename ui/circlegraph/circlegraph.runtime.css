@@ -23,3 +23,9 @@
     stroke-dasharray: 2, 0.8;
 }
 
+div span[class*="circlegraph-property"] {
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+}

@@ -17,6 +17,7 @@
 		let scale;
 		let correctur;
 		var valueElem;
+		let classC;
 
 		this.renderHtml = function () {
 			return '<div class="widget-content widget-circlegraph">' +
@@ -29,9 +30,11 @@
 			valueElem = this.jqElement.find('.circlegraph-property');
 			valueElem.text(this.getProperty('CircleGraph Property'));
 			width = this.getProperty('Width');
-
+			classC = this.getProperty('CircleClass');
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
+
+			console.log (classC);
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
@@ -120,6 +123,9 @@
 				case 'AngleCircleArray':
 					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
+				/*case 'CircleClass':
+					classC = updatePropertyInfo.SinglePropertyValue;
+					break;*/
 			}
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
@@ -167,9 +173,10 @@
 				}
 
 				trajectoryPoint[j] = ['z'];
-				//console.log(trajectoryPoint);
 				SVG.find('.trajectoryPath_A').remove();
 				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
+				//SVG.find(classC).remove();
+				//canvas.path(trajectoryPoint).addClass(classC);
 			}
 		};
 	};

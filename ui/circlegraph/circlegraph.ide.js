@@ -61,6 +61,14 @@
 						'baseType': 'INTEGER',
                         'warnIfNotBoundAsTarget': true
 					},
+					'CircleClass': {
+						'description': 'Data source class',
+                        'isBindingTarget': true,
+                        'isEditable': true,
+						'baseType': 'STRING',
+						'defaultValue': '',
+                        'warnIfNotBoundAsTarget': true
+					},
 					'AngleCircleArray': {
 						'description': 'Total width of the angle',
 						'baseType': 'INTEGER',

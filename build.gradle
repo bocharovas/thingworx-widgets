@@ -35,8 +35,8 @@ def loadExtensionProperties() {
 }
 
 dependencies {
-    compile fileTree(dir:'twx-lib', include:'*.jar')
-    compile fileTree(dir:'lib', include:'*.jar')
+    implementation fileTree(dir:'twx-lib', include:'*.jar')
+    implementation fileTree(dir:'lib', include:'*.jar')
 }
 
 sourceSets {

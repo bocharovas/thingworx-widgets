@@ -4,6 +4,12 @@
     fill: none;
 }
 
+.trajectoryPath_B {
+    stroke:#ffd800;
+    stroke-width: 0.01rem;
+    fill: none;
+}
+
 .mbCircle {
     stroke:#ffffff;
     stroke-width: 0.01rem;

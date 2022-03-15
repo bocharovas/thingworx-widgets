@@ -34,8 +34,6 @@
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
 
-			console.log (classC);
-
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
@@ -123,9 +121,6 @@
 				case 'AngleCircleArray':
 					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
-				/*case 'CircleClass':
-					classC = updatePropertyInfo.SinglePropertyValue;
-					break;*/
 			}
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
@@ -162,7 +157,7 @@
 				for (let i = 0; i < (rows.length); i++) {
 
 					if (validity[i].toString() === 'true' && rmsAccRawAbs[i] >= vibroData1Min
-						&& rmsAccRawAbs[i] <= vibroData1Max /*&& rmsAccRawRel[i] > 0*/) {
+						&& rmsAccRawAbs[i] <= vibroData1Max) {
 						if (j == 0) {
 							trajectoryPoint[j] = ['M', alphaC[i], alphaS[i]];
 						} else {
@@ -172,11 +167,10 @@
 					}
 				}
 
+				let t = '.';
 				trajectoryPoint[j] = ['z'];
-				SVG.find('.trajectoryPath_A').remove();
-				canvas.path(trajectoryPoint).addClass('trajectoryPath_A');
-				//SVG.find(classC).remove();
-				//canvas.path(trajectoryPoint).addClass(classC);
+				SVG.find(t + classC).remove();
+				canvas.path(trajectoryPoint).addClass(classC);
 			}
 		};
 	};

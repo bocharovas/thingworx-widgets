@@ -84,7 +84,14 @@
 						'defaultValue': 100,
 						'isEditable': true,
 						'isBindingTarget': true,
-						'isBindingSource': true
+					},
+					'Geschwindigkeit': {
+						'description': 'Geschwindigkeit',
+						'baseType': 'NUMBER',
+						'isVisible': true,
+						'defaultValue': 10.0,
+						'isEditable': true,
+						'isBindingTarget': true,
 					},
 					'Width': {
 						'description': 'Total width of the widget',

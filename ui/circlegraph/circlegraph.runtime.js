@@ -18,6 +18,11 @@
 		let correctur;
 		var valueElem;
 		let classC;
+		let ausbesserung;
+		let geschwindigkeit;
+		let koeffVerz10;
+		//let koeffVerz17 = 3.83;
+		
 
 		this.renderHtml = function () {
 			return '<div class="widget-content widget-circlegraph">' +
@@ -121,6 +126,10 @@
 				case 'AngleCircleArray':
 					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
+				case 'Geschwindigkeit':
+					geschwindigkeit = updatePropertyInfo.SinglePropertyValue;
+					ausbesserung = geschwindigkeit * koeffVerz10;
+					break;
 			}
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
@@ -141,6 +150,20 @@
 				let alphaC = new Array();
 				let alphaS = new Array();
 				let angle;
+
+				if (geschwindigkeit < 70.0) {koeffVerz10 = 4.92}
+				if (geschwindigkeit < 17.4) {koeffVerz10 = 1.49}
+				
+
+				console.log(koeffVerz10);
+
+				//if (classC === 'trajectoryPath_B') {
+					
+				//} else {
+					//ausbesserung = 0;
+				//}
+				
+
 
 				for (let i = 0; i < rows.length; i++) {
 					angle = 360 / rows.length * i - correctur;

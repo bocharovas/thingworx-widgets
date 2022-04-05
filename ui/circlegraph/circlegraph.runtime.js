@@ -128,7 +128,7 @@
 					break;
 				case 'Geschwindigkeit':
 					geschwindigkeit = updatePropertyInfo.SinglePropertyValue;
-					ausbesserung = geschwindigkeit * koeffVerz10;
+					//ausbesserung = geschwindigkeit * koeffVerz10;
 					break;
 			}
 
@@ -151,11 +151,11 @@
 				let alphaS = new Array();
 				let angle;
 
-				if (geschwindigkeit < 70.0) {koeffVerz10 = 4.92}
-				if (geschwindigkeit < 17.4) {koeffVerz10 = 1.49}
+				//if (geschwindigkeit < 70.0) {koeffVerz10 = 4.92}
+				//if (geschwindigkeit < 17.4) {koeffVerz10 = 1.49}
 				
 
-				console.log(koeffVerz10);
+				console.log(geschwindigkeit);
 
 				//if (classC === 'trajectoryPath_B') {
 					

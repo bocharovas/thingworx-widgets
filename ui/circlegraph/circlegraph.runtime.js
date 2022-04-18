@@ -195,7 +195,7 @@
 					} else if (35.1 <= geschwindigkeit && geschwindigkeit < 38.3) {
 						ausbesserung = 160;
 					} else if (38.3 <= geschwindigkeit && geschwindigkeit < 42.5) {
-						ausbesserung = 170;
+						ausbesserung = 220;
 					} else if (42.5 <= geschwindigkeit && geschwindigkeit < 46.7) {
 						ausbesserung = 180;
 					} else if (46.7 <= geschwindigkeit && geschwindigkeit < 50.9) {

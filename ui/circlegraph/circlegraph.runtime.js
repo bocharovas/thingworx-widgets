@@ -22,9 +22,7 @@
 		let ausbesserung;
 		let geschwindigkeit;
 		let koeffVerz10;
-		//let koeffVerz17 = 3.83;
 		
-
 		this.renderHtml = function () {
 			return '<div class="widget-content widget-circlegraph">' +
 				'<span class="circlegraph-property">' + this.getProperty('CircleGraph Property')
@@ -43,39 +41,11 @@
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
+
 			CreateCircle(canvas, Rad_Mill);
-			let rect = canvas.rect(100, 100).attr({ fill: '#38A6FF' });
-			let image = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil', width = 20, height = 20);
-			console.log ('0');
-			let poiss = canvas.getElementById
-			poiss.setAttribute("width", "20");
-			poiss.setAttribute("height", "20");
-			//let img = new Image();
-			//const img = document.createElement('img');
-			//image.setProperty("width", "20");
-			//image.setProperty("height", "20");
-			console.log ('1');
- 
-			//img.src = 'http://localhost:8080/Thingworx/MediaEntities/turck.pfeil';
-
 			
-
-			console.log ('2');
-
-			//let context = canvas.getContext ('2D');
-			//document.querySelector('.container').appendChild(img);
-
-			//document.body.appendChild(img);
-			//canvas.appendChild(img);
-			//document.body.appendChild(img);
-				
-
-
-			console.log ('3');
-
-			//context.d
-
-			//console.log ('4');
+			let image = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
+				.attr({width: '15px', height: '15px', x: '40px', y: '-50px'});
 			
 			let trajectoryLine = new SVG.PathArray();
 
@@ -160,10 +130,6 @@
 				case 'AngleCircleArray':
 					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
-				/*case 'Geschwindigkeit':
-					//geschwindigkeit = updatePropertyInfo.SinglePropertyValue;
-					//ausbesserung = 10.0 * 1;
-					break;*/
 			}
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
@@ -190,23 +156,6 @@
 				let alphaS = new Array();
 				let angle;
 
-				//if (geschwindigkeit < 70.0) {koeffVerz10 = 4.92}
-				//if (geschwindigkeit < 17.4) {koeffVerz10 = 1.49}
-				
-
-				
-				//console.log(ausbesserung);
-
-				//if (classC === 'trajectoryPath_B') {
-					
-				//} else {
-					//ausbesserung = 0;
-				//}
-				
-				//ausbesserung = geschwindigkeit * 3.8;
-				//correctur = correctur + (geschwindigkeit * 3.8);
-				
-				
 				if (classC === 'trajectoryPath_B') {
 					if (geschwindigkeit < 13.7) {
 						ausbesserung = 30;
@@ -247,8 +196,6 @@
 					console.log(geschwindigkeit);
 					console.log(ausbesserung);
 				}
-
-				//correctur += ausbesserung;
 
 				for (let i = 0; i < rows.length; i++) {
 					if (classC === 'trajectoryPath_B') {

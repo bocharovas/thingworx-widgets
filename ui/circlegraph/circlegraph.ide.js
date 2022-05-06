@@ -4,9 +4,10 @@
 		'</script>')
 
 	TW.IDE.Widgets.circlegraph = function () {
-		
+
 		let canvas;
-		let width, height, Rad_Mill;
+		//let img;
+		let width, height, Rad_Mill, frad;
 		let cgColor = (new Array(10)).map(function () { return SVG.Color.random(); });
 		let vibroData1 = new Array();
 
@@ -23,7 +24,7 @@
 				.stroke({ color: cCircle });
 		}
 
-		
+
 
 		this.widgetIconUrl = function () {
 			return "../Common/extensions/ProjectsWidgets/ui/circlegraph/default_widget_icon.ide.png";
@@ -42,32 +43,32 @@
 					},
 					'CircleArray': {
 						'description': 'Data source',
-                        'isBindingTarget': true,
-                        'isEditable': false,
+						'isBindingTarget': true,
+						'isEditable': false,
 						'baseType': 'INFOTABLE',
-                        'warnIfNotBoundAsTarget': true
+						'warnIfNotBoundAsTarget': true
 					},
 					'CircleArrayMax': {
 						'description': 'Data source max',
-                        'isBindingTarget': true,
-                        'isEditable': false,
+						'isBindingTarget': true,
+						'isEditable': false,
 						'baseType': 'INTEGER',
-                        'warnIfNotBoundAsTarget': true
+						'warnIfNotBoundAsTarget': true
 					},
 					'CircleArrayMin': {
 						'description': 'Data source min',
-                        'isBindingTarget': true,
-                        'isEditable': false,
+						'isBindingTarget': true,
+						'isEditable': false,
 						'baseType': 'INTEGER',
-                        'warnIfNotBoundAsTarget': true
+						'warnIfNotBoundAsTarget': true
 					},
 					'CircleClass': {
 						'description': 'Data source class',
-                        'isBindingTarget': true,
-                        'isEditable': true,
+						'isBindingTarget': true,
+						'isEditable': true,
 						'baseType': 'STRING',
 						'defaultValue': '',
-                        'warnIfNotBoundAsTarget': true
+						'warnIfNotBoundAsTarget': true
 					},
 					'AngleCircleArray': {
 						'description': 'Total width of the angle',
@@ -151,13 +152,20 @@
 			width = this.getProperty('Width');
 			height = this.getProperty('Height') - 10;
 			Rad_Mill = 3 * width / 16 * 1 / 2 * 1 / 2;
+			frad = Rad_Mill / 2;
 
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
+
+
+
+			//CreateCircle(canvas, width, height, Rad_Mill, cgColor[0], cgColor[1]);
+			//CreateCircle(canvas, width, height, frad, cgColor[0], cgColor[1]);
+
 			
-			CreateCircle(canvas, width, height, Rad_Mill, cgColor[0], cgColor[1]);
-			
+
+
 			let alphaC = new Array();
 			let alphaS = new Array();
 			let points = 1100;
@@ -178,7 +186,8 @@
 			let trajectoryPath = canvas.path(trajectoryPoint).addClass('trajectoryPath_A')
 				.fill({ color: SVG.Color.random() })
 				.stroke({ color: SVG.Color.random() });
-		};
 
+
+		};
 	};
 }());

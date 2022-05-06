@@ -5,6 +5,7 @@
 		.append('<script type="text/javascript"' +
 			'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/figures.js">' +
 			'</script>')
+		
 
 	TW.Runtime.Widgets.circlegraph = function () {
 		let canvas;
@@ -43,6 +44,39 @@
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
 			CreateCircle(canvas, Rad_Mill);
+			let rect = canvas.rect(100, 100).attr({ fill: '#38A6FF' });
+			let image = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil', width = 20, height = 20);
+			console.log ('0');
+			let poiss = canvas.getElementById
+			poiss.setAttribute("width", "20");
+			poiss.setAttribute("height", "20");
+			//let img = new Image();
+			//const img = document.createElement('img');
+			//image.setProperty("width", "20");
+			//image.setProperty("height", "20");
+			console.log ('1');
+ 
+			//img.src = 'http://localhost:8080/Thingworx/MediaEntities/turck.pfeil';
+
+			
+
+			console.log ('2');
+
+			//let context = canvas.getContext ('2D');
+			//document.querySelector('.container').appendChild(img);
+
+			//document.body.appendChild(img);
+			//canvas.appendChild(img);
+			//document.body.appendChild(img);
+				
+
+
+			console.log ('3');
+
+			//context.d
+
+			//console.log ('4');
+			
 			let trajectoryLine = new SVG.PathArray();
 
 			for (let j = 0; j < 12; (j = j + 2)) {
@@ -195,7 +229,7 @@
 					} else if (35.1 <= geschwindigkeit && geschwindigkeit < 38.3) {
 						ausbesserung = 160;
 					} else if (38.3 <= geschwindigkeit && geschwindigkeit < 42.5) {
-						ausbesserung = 220;
+						ausbesserung = 200;
 					} else if (42.5 <= geschwindigkeit && geschwindigkeit < 46.7) {
 						ausbesserung = 180;
 					} else if (46.7 <= geschwindigkeit && geschwindigkeit < 50.9) {

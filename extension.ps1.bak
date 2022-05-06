@@ -3,7 +3,7 @@ $PowershellUrl = "https://github.com/PowerShell/PowerShell/releases/download/v7.
 
 $twxUser = "Administrator"
 $twxPassword = "ch@ngMe@F1rstL0gon"
-$twxUrl = "http://localhost:8080/Thingworx"
+$twxUrl = "https://mobilesrv.digitaltwin.ru/Thingworx"
 #$twxPassword = "eutOBGpDV8LCn5YK"
 #$twxUrl = "https://mobilesrv.digitaltwin.ru/Thingworx"
 $twxExtensionName = "ProjectsWidgets"

@@ -48,6 +48,13 @@
 						'baseType': 'INFOTABLE',
 						'warnIfNotBoundAsTarget': true
 					},
+					'Richtung': {
+						'description': 'Richtung',
+						'isBindingTarget': true,
+						'isEditable': false,
+						'baseType': 'STRING',
+						'warnIfNotBoundAsTarget': true
+					},
 					'CircleArrayMax': {
 						'description': 'Data source max',
 						'isBindingTarget': true,

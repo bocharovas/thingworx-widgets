@@ -44,8 +44,11 @@
 
 			CreateCircle(canvas, Rad_Mill);
 			
-			let image = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
+			let imageRechts = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
 				.attr({width: '15px', height: '15px', x: '40px', y: '-50px'});
+
+			let imageLinks = canvas.image('http://localhost:8080/Thingworx/MediaEntities/fieLinks')
+				.attr({width: '15px', height: '15px', x: '-55px', y: '-50px'});
 			
 			let trajectoryLine = new SVG.PathArray();
 

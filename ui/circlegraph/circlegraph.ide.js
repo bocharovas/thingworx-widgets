@@ -52,7 +52,7 @@
 						'description': 'Richtung',
 						'isBindingTarget': true,
 						'isEditable': false,
-						'baseType': 'STRING',
+						'baseType': 'INTEGER',
 						'warnIfNotBoundAsTarget': true
 					},
 					'CircleArrayMax': {
@@ -164,14 +164,6 @@
 			canvas = SVG().addTo(document.getElementById(this.jqElementId))
 				.size(width, height)
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
-
-
-
-			//CreateCircle(canvas, width, height, Rad_Mill, cgColor[0], cgColor[1]);
-			//CreateCircle(canvas, width, height, frad, cgColor[0], cgColor[1]);
-
-			
-
 
 			let alphaC = new Array();
 			let alphaS = new Array();

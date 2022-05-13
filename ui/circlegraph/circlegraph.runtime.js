@@ -5,7 +5,7 @@
 		.append('<script type="text/javascript"' +
 			'src="../Common/extensions/ProjectsWidgets/ui/circlegraph//include/figures.js">' +
 			'</script>')
-		
+
 
 	TW.Runtime.Widgets.circlegraph = function () {
 		let canvas;
@@ -17,12 +17,13 @@
 		let vibroData1Max;
 		let scale;
 		let correctur;
+		let richtung;
 		var valueElem;
 		let classC;
 		let ausbesserung;
 		let geschwindigkeit;
-		let koeffVerz10;
-		
+
+
 		this.renderHtml = function () {
 			return '<div class="widget-content widget-circlegraph">' +
 				'<span class="circlegraph-property">' + this.getProperty('CircleGraph Property')
@@ -43,13 +44,23 @@
 				.viewbox(-width / 16, -height / 16, width / 8, height / 8);
 
 			CreateCircle(canvas, Rad_Mill);
-			
-			let imageRechts = canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
-				.attr({width: '15px', height: '15px', x: '40px', y: '-50px'});
 
-			let imageLinks = canvas.image('http://localhost:8080/Thingworx/MediaEntities/fieLinks')
-				.attr({width: '15px', height: '15px', x: '-55px', y: '-50px'});
-			
+			if (classC === 'trajectoryPath_B') {
+				canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
+					.attr({ width: '15px', height: '15px', x: '40px', y: '-50px', id: 'rightB' });
+
+				canvas.image('http://localhost:8080/Thingworx/MediaEntities/fieLinks')
+					.attr({ width: '15px', height: '15px', x: '-55px', y: '-50px', id: 'leftB' });
+			}
+
+			if (classC === 'trajectoryPath_A') {
+				canvas.image('http://localhost:8080/Thingworx/MediaEntities/turck.pfeil')
+					.attr({ width: '15px', height: '15px', x: '40px', y: '-50px', id: 'rightA' });
+
+				canvas.image('http://localhost:8080/Thingworx/MediaEntities/fieLinks')
+					.attr({ width: '15px', height: '15px', x: '-55px', y: '-50px', id: 'leftA' });
+			}
+
 			let trajectoryLine = new SVG.PathArray();
 
 			for (let j = 0; j < 12; (j = j + 2)) {
@@ -133,6 +144,60 @@
 				case 'AngleCircleArray':
 					correctur = updatePropertyInfo.SinglePropertyValue;
 					break;
+				case 'Richtung':
+					richtung = updatePropertyInfo.SinglePropertyValue;
+					//console.log(richtung);
+					
+					/*switch (richtung) {
+						case 'CW':
+							leftSymbolB.classList.add('dn');
+							rightSymbolB.classList.remove('dn');
+							console.log(leftSymbol);
+							console.log('оippa');
+							break;
+						case 'CWW':
+							rightSymbolB.classList.add('dn');
+							leftSymbolB.classList.remove('dn');
+							console.log(rightSymbol);
+							console.log('hippa');
+							break;
+						default:
+							rightSymbolB.classList.add('dn');
+							leftSymbolB.classList.add('dn');
+							console.log(rightSymbol);
+							console.log('tuppa');
+					}*/
+					if (classC === 'trajectoryPath_A') {
+						let leftSymbolA = document.getElementById('leftA');
+						let rightSymbolA = document.getElementById('rightA');
+						console.log(richtung);
+						console.log(typeof richtung);
+						let richInt = richtung & 2048;
+						console.log(typeof richtung);
+						console.log(typeof richInt);
+						switch (richInt) {
+							
+							case 2048:
+								leftSymbolA.classList.add('dn');
+								rightSymbolA.classList.remove('dn');
+								console.log(leftSymbolA);
+								console.log('оippa');
+								break;
+							case 0:
+								rightSymbolA.classList.add('dn');
+								leftSymbolA.classList.remove('dn');
+								console.log(rightSymbolA);
+								console.log('hippa');
+								break;
+							default:
+								rightSymbolA.classList.add('dn');
+								leftSymbolA.classList.add('dn');
+								console.log(richtung);
+								console.log(rightSymbolA);
+								console.log('tuppa');
+						}
+					}
+					
 			}
 
 			if (updatePropertyInfo.TargetProperty === 'CircleGraph Property') {
@@ -144,13 +209,11 @@
 
 				let rows = updatePropertyInfo.ActualDataRows;
 
-				
-
 				for (let i = 0; i < rows.length; i++) {
 					rmsAccRawRel[i] = scale - rows[i].S603C01RMSAccRaw;
 					rmsAccRawAbs[i] = scale - rmsAccRawRel[i];
 					validity[i] = rows[i].S603C01Validity;
-					
+
 				}
 
 				geschwindigkeit = rows[1].xAxisPeakAcceleration;
@@ -196,8 +259,8 @@
 						ausbesserung = 230;
 					}
 
-					console.log(geschwindigkeit);
-					console.log(ausbesserung);
+					//console.log(geschwindigkeit);
+					//console.log(ausbesserung);
 				}
 
 				for (let i = 0; i < rows.length; i++) {
@@ -206,7 +269,7 @@
 					} else {
 						angle = 360 / rows.length * i - correctur;
 					}
-					
+
 					if (angle < 0) angle = angle + 360;
 					alphaC[i] = ((rmsAccRawRel[i] / scale) * Rad_Mill) *
 						Math.cos((angle) * (Math.PI / 180));

@@ -22,6 +22,8 @@
 		let classC;
 		let ausbesserung;
 		let geschwindigkeit;
+		let reduction = 0.04;
+		let widerhall = 0.19;
 
 
 		this.renderHtml = function () {
@@ -223,7 +225,7 @@
 				let angle;
 
 				if (classC === 'trajectoryPath_B') {
-					if (geschwindigkeit < 13.7) {
+					/*if (geschwindigkeit < 13.7) {
 						ausbesserung = 30;
 					} else if (13.7 <= geschwindigkeit && geschwindigkeit < 17.4) {
 						ausbesserung = 40;
@@ -257,10 +259,16 @@
 						ausbesserung = 220;
 					} else {
 						ausbesserung = 230;
-					}
-
-					//console.log(geschwindigkeit);
-					//console.log(ausbesserung);
+					}*/
+					console.log('!!!!!');
+					ausbesserung = reduction * geschwindigkeit * 360 * widerhall;
+					console.log('*****');
+					console.log(reduction);
+					console.log(geschwindigkeit);
+					console.log(Math.PI);
+					console.log(widerhall);
+					console.log(ausbesserung);
+					console.log('*****');
 				}
 
 				for (let i = 0; i < rows.length; i++) {

@@ -148,27 +148,6 @@
 					break;
 				case 'Richtung':
 					richtung = updatePropertyInfo.SinglePropertyValue;
-					//console.log(richtung);
-					
-					/*switch (richtung) {
-						case 'CW':
-							leftSymbolB.classList.add('dn');
-							rightSymbolB.classList.remove('dn');
-							console.log(leftSymbol);
-							console.log('оippa');
-							break;
-						case 'CWW':
-							rightSymbolB.classList.add('dn');
-							leftSymbolB.classList.remove('dn');
-							console.log(rightSymbol);
-							console.log('hippa');
-							break;
-						default:
-							rightSymbolB.classList.add('dn');
-							leftSymbolB.classList.add('dn');
-							console.log(rightSymbol);
-							console.log('tuppa');
-					}*/
 					if (classC === 'trajectoryPath_A') {
 						let leftSymbolA = document.getElementById('leftA');
 						let rightSymbolA = document.getElementById('rightA');

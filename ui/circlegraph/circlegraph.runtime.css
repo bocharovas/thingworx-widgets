@@ -1,103 +1,42 @@
-/* Place custom CSS styling for CircleGraph widget at runtime in this file */
-
-
-.axis_x, .axis_y {
-    stroke: red;
-    stroke-opacity: 0.7;
-    stroke-width: 0.05;
-    stroke-dasharray: 10, 0.6, 1.2, 0.6;
+.trajectoryPath_A {
+    stroke:#ffd800;
+    stroke-width: 0.01rem;
+    fill: none;
 }
 
-.axis_x_0, .axis_y_0, .axis_x_1, .axis_y_1 {
+.trajectoryPath_B {
+    stroke:#ffd800;
+    stroke-width: 0.01rem;
+    fill: none;
+}
+
+.mbCircle {
+    stroke:#ffffff;
+    stroke-width: 0.01rem;
+}
+
+.mbText {
+    stroke:#ffffff;
+    stroke-width: 0.01rem;
+    fill: white;
+    font-size: 0.1rem;  
+}
+
+.axis_x_0 {
     stroke: rgb(0, 180, 246);
     stroke-opacity: 0.5;
     stroke-width: 0.08;
     stroke-dasharray: 2, 0.8;
 }
 
-.axis_angle_title, .axis_angle_Betta_title, .axis_angle_Alpha_title {
-    font-size: 20%;
-    font-family: 'Verdana';
+div span[class*="circlegraph-property"] {
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
 }
 
-.Nil_Line, .Alp_Line, .trAlpAnglePath{
-    stroke-opacity: 0.5;
-    stroke-width: 0.15;
-    stroke-dasharray: 1, 0;
-    stroke: seagreen;
-    fill-opacity: 0.3;
+.dn {
+    display: none;
 }
 
-.Beta_Line, .trBetaAnglePath {
-    stroke-opacity: 0.5;
-    stroke-width: 0.15;
-    stroke-dasharray: 1, 0;
-    stroke:springgreen;
-    fill-opacity: 0.3;
-}
-
-.trajectoryPath_A {
-    fill-opacity: 0.3;
-    stroke-opacity: 0.6;
-    stroke-width: 0.5;
-}
-
-.trTargetPath {
-    fill: transparent;
-    stroke-opacity: 0.8;
-    stroke-width: 0.6;
-    stroke-dasharray: 1, 0;
-    stroke: red;
-}
-
-.CoC_Line, .CoM_Line {
-    stroke-opacity: 0.8;
-    stroke-width: 0.22;
-    stroke-dasharray: 2, 0.02;
-}
-
-.CoC_Line {
-    stroke: rgb(12, 196, 255);
-}
-
-.CoM_Line {
-    stroke: rgb(255, 117, 198);
-}
-
-.CoM_Arrow, .CoC_Arrow {
-    stroke-opacity: 0.8;
-    stroke-width: 0.1;
-    stroke: purple;
-    fill: red;
-}
-
-.trRadius_CoCPath, .trRadius_CoMPath {
-    stroke-opacity: 0.5;
-    stroke-width: 0.22;
-    stroke-dasharray: 1, 0;
-    fill-opacity: 0.3;
-}
-
-.Radius_CoC_Title, .Radius_CoM_Title {
-    font-size: 20.0%;
-    font-family: 'Verdana';
-}
-
-.Qs_Title, .Qt_Title {
-    font-size: 20.0%;
-    font-family: 'Verdana';
-    fill: green;
-}
-
-.trajectoryPathNapMunn {
-    fill-opacity: 0.3;
-    stroke-opacity: 0.3;
-    stroke-width: 0.32;
-}
-
-.Tetta_S_Line, .Tetta_T_Line {
-    stroke-opacity: 1.0;
-    stroke-width: 0.08;
-    stroke-dasharray: 1, 0;
-    stroke: blue;
-}

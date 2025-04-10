@@ -11,12 +11,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.thingworx.eclipse.extension.ui.ExtensionBuilder</name>
+			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+			<name>com.thingworx.eclipse.extension.ui.ExtensionBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>

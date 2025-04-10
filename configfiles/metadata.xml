@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities>
+    <ExtensionPackages>
+        <ExtensionPackage
+         dependsOn=""
+         description=""
+         haCompatible="false"
+         minimumThingWorxVersion="9.2.0"
+         name="ProjectsWidgets"
+         packageVersion="1.0.0"
+         vendor=""></ExtensionPackage>
+    </ExtensionPackages>
+    <Widgets>
+        <Widget
+         name="circlegraph">
+            <UIResources>
+                <FileResource
+                 description=""
+                 file="circlegraph.ide.js"
+                 isDevelopment="true"
+                 isRuntime="false"
+                 type="JS"></FileResource>
+                <FileResource
+                 description=""
+                 file="circlegraph.ide.css"
+                 isDevelopment="true"
+                 isRuntime="false"
+                 type="CSS"></FileResource>
+                <FileResource
+                 description=""
+                 file="circlegraph.runtime.js"
+                 isDevelopment="false"
+                 isRuntime="true"
+                 type="JS"></FileResource>
+                <FileResource
+                 description=""
+                 file="circlegraph.runtime.css"
+                 isDevelopment="false"
+                 isRuntime="true"
+                 type="CSS"></FileResource>
+            </UIResources>
+        </Widget>
+	</Widgets>
+</Entities>

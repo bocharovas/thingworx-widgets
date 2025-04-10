@@ -1,0 +1,6 @@
+.gitignore       merge=union
+*.gitattributes  merge=union
+*.env            merge=union
+*.env.example    merge=union
+*.npmrc          merge=union
+*.editorconfig   merge=union
